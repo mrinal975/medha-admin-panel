@@ -2,26 +2,28 @@ import axios, { AxiosResponse } from "axios";
 
 interface ApiResponse<T> {
   data: T;
+  status: number;
+  message: string;
 }
 
 class ApiService {
-  private apiUrl: string;
+  private baseUrl: string;
 
-  constructor(apiUrl: string) {
-    this.apiUrl = apiUrl;
+  constructor() {
+    this.baseUrl = "http://127.0.0.1:8002/api/";
   }
 
   public async get<T>(url: string): Promise<T> {
     const response: AxiosResponse<ApiResponse<T>> = await axios.get<
       ApiResponse<T>
-    >(`${this.apiUrl}${url}`);
+    >(`${this.baseUrl}${url}`);
     return response.data.data;
   }
 
   public async post<T, U>(url: string, data: T): Promise<U> {
     const response: AxiosResponse<ApiResponse<U>> = await axios.post<
       ApiResponse<U>
-    >(`${this.apiUrl}${url}`, data);
+    >(`${this.baseUrl}${url}`, data);
     return response.data.data;
   }
 
