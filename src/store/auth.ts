@@ -14,6 +14,7 @@ interface AuthState {
   email: User | null;
   name: User | null;
   token: User | null;
+  isAuthenticated: boolean;
 }
 
 export const useAuthStore = defineStore("auth", {
@@ -23,6 +24,7 @@ export const useAuthStore = defineStore("auth", {
     email: null,
     name: null,
     token: null,
+    isAuthenticated: false,
   }),
   getters: {
     isLoggedIn: (state) => !!state.id,
@@ -38,14 +40,24 @@ export const useAuthStore = defineStore("auth", {
       this.phone = payload.phone;
       this.name = payload.name;
       this.email = payload.email;
-      this.token = payload.token;
+      this.token = payload.access_token;
+    },
+    setAuthenticated(value: boolean) {
+      console.log("set auth", value);
+      this.isAuthenticated = value;
+      console.log("set auth after", this.isAuthenticated);
     },
 
     login(payload: any) {
       this.setUser(payload);
+      this.setAuthenticated(true);
     },
 
     logout() {
+      this.setAuthenticated(false);
+      this.clearAuth();
+    },
+    clearAuth() {
       this.id = null;
       this.phone = null;
       this.name = null;

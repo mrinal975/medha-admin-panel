@@ -10,5 +10,5 @@ import router from "./router";
 const app = createApp(App);
 app.component("default-layout", DashboardLayout);
 app.component("empty-layout", EmptyLayout);
-
-app.use(router).use(createPinia()).use(VueApexCharts).mount("#app");
+app.use(createPinia());
+app.use(router).use(VueApexCharts).mount("#app");

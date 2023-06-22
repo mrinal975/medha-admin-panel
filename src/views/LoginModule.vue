@@ -72,9 +72,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { useAuthStore } from "@/store/auth";
 import ApiService from "../service/ApiService";
+import router from "@/router";
 
 export default defineComponent({
   data() {
@@ -82,6 +83,14 @@ export default defineComponent({
       email: "",
       password: "",
     };
+  },
+  setup() {
+    onMounted(() => {
+      if (useAuthStore().isAuthenticated) {
+        router.push("/");
+      }
+      console.log(useAuthStore().isAuthenticated, "--");
+    });
   },
   methods: {
     async login() {
@@ -91,10 +100,10 @@ export default defineComponent({
         email: this.email,
         password: this.password,
       };
-      console.log("request", request);
       try {
         const userData = await apiService.post(url, request);
         useAuthStore().login(userData);
+        router.push("/");
       } catch (error) {
         // Show error message or perform error handling
         console.error(error);
