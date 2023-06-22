@@ -3,7 +3,7 @@ import Dashboard from "../views/Dashboard.vue";
 import Forms from "../views/Forms.vue";
 import Tables from "../views/Tables.vue";
 import UIElements from "../views/UIElements.vue";
-import Login from "../views/Login.vue";
+import LoginModule from "../views/LoginModule.vue";
 import Modal from "../views/Modal.vue";
 import Chart from "../views/ChartView.vue";
 import Card from "../views/CardView.vue";
@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "Login",
-    component: Login,
+    component: LoginModule,
     meta: { layout: "empty" },
   },
   {
