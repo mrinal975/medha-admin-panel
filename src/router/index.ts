@@ -9,7 +9,8 @@ import Chart from "../views/ChartView.vue";
 import Card from "../views/CardView.vue";
 import Blank from "../views/BlankView.vue";
 import NotFound from "../views/NotFound.vue";
-
+import { useAuthStore } from "@/store/auth";
+import { storeToRefs } from "pinia";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/login",
@@ -64,5 +65,13 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach((to) => {
+  // ✅ This will work make sure the correct store is used for the
+  // current running app
+const {isAuthenticated, phone} = storeToRefs(useAuthStore());
+  console.log('data', isAuthenticated, phone);
+
+})
 
 export default router;

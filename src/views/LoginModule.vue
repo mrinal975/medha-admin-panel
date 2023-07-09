@@ -101,7 +101,8 @@ export default defineComponent({
         password: this.password,
       };
       try {
-        const userData = await apiService.post(url, request);
+        // const userData = await apiService.post(url, request);
+        const userData = {'name':"Mrinal", "email":"mrinal@gmail.com", "token":".............."};
         useAuthStore().login(userData);
         router.push("/");
       } catch (error) {

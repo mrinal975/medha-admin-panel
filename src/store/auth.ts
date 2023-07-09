@@ -18,29 +18,25 @@ interface AuthState {
 }
 
 export const useAuthStore = defineStore("auth", {
-  state: (): AuthState => ({
-    id: null,
-    phone: null,
-    email: null,
-    name: null,
-    token: null,
+  state: () => ({
     isAuthenticated: false,
+    phone: null
   }),
   getters: {
-    isLoggedIn: (state) => !!state.id,
-    getName: (state) => state.name,
-    getEmail: (state) => state.email,
+    // isLoggedIn: (state) => !!state.id,
+    // getName: (state) => state.name,
+    // getEmail: (state) => state.email,
     getPhone: (state) => state.phone,
-    currentUser: (state) => state.id,
-    getToken: (state) => state.token,
+    // currentUser: (state) => state.id,
+    // getToken: (state) => state.token,
   },
   actions: {
     setUser(payload: any) {
-      this.id = payload.id;
+      this.isAuthenticated = payload.isAuthenticated;
       this.phone = payload.phone;
-      this.name = payload.name;
-      this.email = payload.email;
-      this.token = payload.access_token;
+      // this.name = payload.name;
+      // this.email = payload.email;
+      // this.token = payload.access_token;
     },
     setAuthenticated(value: boolean) {
       console.log("set auth", value);
@@ -58,11 +54,11 @@ export const useAuthStore = defineStore("auth", {
       this.clearAuth();
     },
     clearAuth() {
-      this.id = null;
+      // this.id = null;
       this.phone = null;
-      this.name = null;
-      this.email = null;
-      this.token = null;
+      // this.name = null;
+      // this.email = null;
+      // this.token = null;
     },
   },
 });
